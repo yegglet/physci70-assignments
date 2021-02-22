@@ -54,7 +54,7 @@ $(function(){
 <h3>Three.js </h3><br>
 
     <script src="three.js"></script>
-<!--    <script src="stats.js"></script>-->
+    <script src="stats.js"></script>
     <script src="detector.js"></script>
     <script>
 
@@ -258,8 +258,7 @@ $(function(){
             //Detector.addGetWebGLMessage();
 
             scene = new THREE.Scene();
-            scene.background(new THREE.Color(0x72645b));
-            
+
             camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
             camera.position.z = 70;
             camera.position.y = 0;
