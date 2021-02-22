@@ -291,7 +291,7 @@ $(function(){
                 console.log(e);
             }
 
-            xhr.open( "GET", 'Octocat-v1.stl', true );
+            xhr.open( "GET", 'https://nathanmelenbrink.github.io/ps70/05_3d/Octocat-v1.stl', true );
             xhr.responseType = "arraybuffer";
             //xhr.setRequestHeader("Accept","text/plain");
             //xhr.setRequestHeader("Content-Type","text/plain");
@@ -395,6 +395,12 @@ $(function(){
     });
 }  
 
+</script>
+    
+    <script type="text/javascript">
+window.onload = function() {
+    STLViewer("https://nathanmelenbrink.github.io/ps70/05_3d/Octocat-v1.stl", "model")
+}
 </script>
 <div class="row">
 <h3>Sculpture - Haystack 2016. </h3><br>
