@@ -79,7 +79,7 @@
 
 				const material = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
 
-				loader.load( './models/stl/binary/pr2_head_pan.stl', function ( geometry ) {
+				loader.load( 'Octocat-v1.stl', function ( geometry ) {
 
 					const mesh = new THREE.Mesh( geometry, material );
 
@@ -94,7 +94,7 @@
 
 				} );
 
-				loader.load( './models/stl/binary/pr2_head_tilt.stl', function ( geometry ) {
+				loader.load( 'Octocat-v1.stl', function ( geometry ) {
 
 					const mesh = new THREE.Mesh( geometry, material );
 
@@ -110,7 +110,7 @@
 				} );
 
 				// Colored binary STL
-				loader.load( './models/stl/binary/colored.stl', function ( geometry ) {
+				loader.load( 'Octocat-v1.stl', function ( geometry ) {
 
 					let meshMaterial = material;
 
