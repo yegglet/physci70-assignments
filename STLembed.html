@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131686897-2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-131686897-2');
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>TEST</title>
+<meta name="description" content="Index Page">
+<script src="../js/vendor/jquery.min.js"></script>
+<script>
+$(function(){
+  $("#header").load("../header.html");
+  $("#footer").load("../footer.html");
+});
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="../css/style.css" rel="stylesheet">
+<script src="../js/vendor/modernizr.js"></script>
+</head>
+
+<body>
+
+<h1> 3D Model Web Viewers</h1>
+
+
+<div id="header"></div>
+
+<!-- FIRST ROW -->
+<div class="row">
+<h3><a href ="https://www.viewstl.com/embed/">ViewSTL.com </a></h3><br>
+
+<iframe id="vs_iframe" src="https://www.viewstl.com/?embedded&url=https%3A%2F%2Fnathanmelenbrink.github.io%2Fps70%2F05_3d%2FFlexi-Rex-improved.stl&color=green&bgcolor=pink" style="border:0;margin:0;width:100%;height:400px;"></iframe>
+
+</div >
+    
+<div class="row">
+<h3><a href ="https://knowledge.autodesk.com/support/fusion-360/troubleshooting/caas/sfdcarticles/sfdcarticles/How-to-embed-a-viewer-of-a-Fusion-360-design-into-a-website.html">Embedding Fusion 360 Design </a></h3><br>
+
+<iframe src="https://myhub.autodesk360.com/ue2d519a8/shares/public/SH56a43QTfd62c1cd968c3b6e1092bc87d03?mode=embed" width="800" height="600" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+</div >
+<div class="row">    
+<h3>Three.js </h3><br>
+
+<script src="three.min.js"></script>
+<script src="STLLoader.js"></script>
+<script src="OrbitControls.js"></script>
+  
+    <div id="model" style="width: 500px; height: 500px"> </div>
+    <script>  
+ 
+    function STLViewer(model, elementID) {
+    var elem = document.getElementById(elementID)
+    
+    var camera = new THREE.PerspectiveCamera(70, 
+    elem.clientWidth/elem.clientHeight, 1, 1000);
+    
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(elem.clientWidth, elem.clientHeight);
+    elem.appendChild(renderer.domElement);
+    
+    window.addEventListener('resize', function () {
+    renderer.setSize(elem.clientWidth, elem.clientHeight);
+    camera.aspect = elem.clientWidth/elem.clientHeight;
+    camera.updateProjectionMatrix();
+    }, false);
+    
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.rotateSpeed = 0.7;
+    controls.dampingFactor = 0.1;
+    controls.enableZoom = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2;
+    
+    var scene = new THREE.Scene();
+    scene.add(new THREE.HemisphereLight(0xffffff, 1.5));
+    
+    (new THREE.STLLoader()).load(model, function (geometry) {
+    var material = new THREE.MeshPhongMaterial({ 
+        color: 0xff5533, 
+        specular: 100, 
+        shininess: 100 });
+    var mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+  					const material = new THREE.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
+					const mesh = new THREE.Mesh( geometry, material ); }     
+        
+    var middle = new THREE.Vector3();
+    geometry.computeBoundingBox();
+    geometry.boundingBox.getCenter(middle);
+    mesh.geometry.applyMatrix(new THREE.Matrix4().makeTranslation( 
+                                  -middle.x, -middle.y, -middle.z ) );    
+                                  
+    var largestDimension = Math.max(geometry.boundingBox.max.x,
+                            geometry.boundingBox.max.y, 
+                            geometry.boundingBox.max.z)
+    camera.position.z = largestDimension * 1.5;              
+    
+    var animate = function () {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+    }; 
+    
+        animate();
+    });
+}  
+</script>
+
+<script type="text/javascript">
+window.onload = function() {
+    STLViewer("Octocat-v1.stl", "model")
+}
+</script>      
+    
+</div >
+<div class="row">
+<h3>Sculpture - Haystack 2016. </h3><br>
+<div class="col-md-9">
+<img width="400"  src="./art1.jpg" alt="art1">
+<img width="400"  src="./art2.jpg" alt="art2">
+</div >
+</div >
+
+
+
+
+
+
+
+<div id="footer"></div>
+
+
+</body>
+</html>
