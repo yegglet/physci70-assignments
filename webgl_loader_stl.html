@@ -53,6 +53,7 @@ $(function(){
 <div class="row">    
 <h3>Three.js </h3><br>
 
+<!--
     <script src="three.js"></script>
     <script src="stats.js"></script>
     <script src="detector.js"></script>
@@ -61,7 +62,7 @@ $(function(){
 
         var camera, scene, renderer,
         geometry, material, mesh, light1, stats;
-
+        
         function trim (str) {
             str = str.replace(/^\s+/, '');
             for (var i = str.length - 1; i >= 0; i--) {
@@ -72,7 +73,7 @@ $(function(){
             }
             return str;
         }
-
+        
         // Notes:
         // - STL file format: http://en.wikipedia.org/wiki/STL_(file_format)
         // - 80 byte unused header
@@ -138,7 +139,7 @@ $(function(){
 
             stl = null;
         };  
-
+        
         var parseStl = function(stl) {
             var state = '';
             var lines = stl.split('\n');
@@ -314,7 +315,7 @@ $(function(){
             // note: three.js includes requestAnimationFrame shim
             requestAnimationFrame( animate );
             render();
-//            stats.update();
+            controls.update();
 
         }
 
@@ -332,6 +333,7 @@ $(function(){
 
 </script>
 </div >
+-->
     <script src="three.min.js"></script>
     <script src="STLLoader.js"></script>
     <script src="OrbitControls.js"></script>
@@ -364,7 +366,8 @@ $(function(){
     
     var scene = new THREE.Scene();
     scene.add(new THREE.HemisphereLight(0xffffff, 1.5));
-    
+    scene.background = new THREE.Color( 0x22cc5b );
+        
     (new THREE.STLLoader()).load(model, function (geometry) {
     var material = new THREE.MeshPhongMaterial({ 
         color: 0xff5533, 
@@ -372,6 +375,7 @@ $(function(){
         shininess: 100 });
     var mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
+        
         
         
     var middle = new THREE.Vector3();
